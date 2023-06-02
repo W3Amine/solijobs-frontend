@@ -2,6 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import SoliJobLogoblackbg from "../../Assets/images/logos/SoliJobLogoblackbg.png";
 import SoliJobLogowhitebg from "../../Assets/images/logos/SoliJobLogowhitebg.png";
+import AuthRenderGate from "../../AuthGates/RenderingGates/AuthRenderGate";
+import GuestRenderGate from "../../AuthGates/RenderingGates/GuestRenderGate";
+import ProfileAvatar from "./Profiles/ProfileAvatar";
 
 export default function NavBar() {
   return (
@@ -65,17 +68,24 @@ export default function NavBar() {
                       </Link>
                     </div>
 
-                    <div className="nav-btn-right">
-                      <Link to="register" className="primarybtn">
-                        <i className="feather-briefcase" /> register
-                      </Link>
-                    </div>
+                    {/* render only for guests */}
+                    <GuestRenderGate>
+                      <div className="nav-btn-right">
+                        <Link to="register" className="primarybtn">
+                          <i className="feather-briefcase" /> register
+                        </Link>
+                      </div>
+                      <div className="nav-btn-right">
+                        <Link to="login" className="primarybtn">
+                          <i className="feather-briefcase" /> Login
+                        </Link>
+                      </div>
+                    </GuestRenderGate>
 
-                    <div className="nav-btn-right">
-                      <Link to="login" className="primarybtn">
-                        <i className="feather-briefcase" /> Login
-                      </Link>
-                    </div>
+                    {/* render only for auth users */}
+                    <AuthRenderGate>
+                      <ProfileAvatar />
+                    </AuthRenderGate>
                   </div>
                 </div>
               </div>

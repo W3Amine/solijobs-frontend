@@ -1,11 +1,28 @@
-import React from "react";
+import { useRef } from "react";
 import { Link } from "react-router-dom";
 
 import SinglePageHeader from "../../Components/UIComponents/SinglePageHeader";
 
 import googleicon from "../../Assets/images/other/google-icon.png";
 
+import { LoginRequest } from "../../API/Composables/LoginRequest";
+
 export default function Login() {
+  const EmailInput = useRef();
+  const PasswordInput = useRef();
+  const { login, ServerErrors } = LoginRequest();
+
+  function LoginHandler(e) {
+    e.preventDefault();
+    const LoginData = {
+      email: EmailInput.current.value,
+      password: PasswordInput.current.value,
+    };
+
+    console.log(LoginData);
+    login(LoginData);
+  }
+
   return (
     <>
       <SinglePageHeader PageTitle="Login lol xd" />
@@ -17,29 +34,36 @@ export default function Login() {
             <p>Login and get access to all the features of SoliJob</p>
           </div>
 
-          <div className="d-flex" id="login">
+          <form onSubmit={LoginHandler} className="d-flex" id="login">
             <div className="row  col-lg-4 col-md-6 mx-auto">
+              {/* display server errors here */}
+              {ServerErrors && (
+                <div className="alert alert-danger col-md-11 mx-auto" role="alert">
+                  {Object.keys(ServerErrors).map((key) => (
+                    <p className="my-0" key={key}>
+                      {ServerErrors[key][0]}
+                    </p>
+                  ))}
+                </div>
+              )}
+              {/* server errors end */}
               <div className="col-lg-12">
                 <div className="form-group mb-3">
-                  <input name="username" type="text" required="" className="form-control" placeholder="Usearname*" />
+                  <input ref={EmailInput} name="email" type="text" required="" className="form-control" placeholder="email*" />
                 </div>
               </div>
               <div className="col-lg-12">
                 <div className="form-group mb-3">
-                  <input name="email" type="text" className="form-control" required="" placeholder="Password*" />
+                  <input ref={PasswordInput} name="password" type="password" className="form-control" required="" placeholder="Password*" />
                 </div>
               </div>
               <div className="col-lg-12">
                 <div className="forgot-wrap">
                   <div className="form-group mb-3">
                     <div className="form-check">
-                      <input type="checkbox" className="form-check-input" id="Password4" />
-                      <label className="form-check-label rem-forgot" htmlFor="Password4">
-                        Remember me{" "}
-                        <a href="javascript:;" className="site-text-primary">
-                          Forgot Password
-                        </a>
-                      </label>
+                      <Link to="/register" className="site-text-primary">
+                        Forgot Password
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -79,7 +103,7 @@ export default function Login() {
                 </div>
               </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </>
