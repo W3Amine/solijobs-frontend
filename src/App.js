@@ -55,100 +55,101 @@ function App() {
       <Router>
         {/* auth context provider start */}
         <AuthContextProvider>
-          <GetAuthUserData />
+          {/* <GetAuthUserData /> */}
           <Routes>
             {/* ############################################################################################## */}
             {/* START # regular users User interfaces (UI) Routes 'candidates' / 'employers' / 'managers' */}
             {/* ############################################################################################## */}
-
-            <Route path="/" element={<UIIndex />}>
-              <Route index element={<Home />} />
-              <Route path="jobs">
-                <Route index element={<Jobs />} />
-                <Route path=":SingleJobId" element={<JobSingle />} />
-              </Route>
-              <Route path="categories" element={<Categories />} />
-              <Route path="blog">
-                <Route index element={<Blog />} />
-                <Route path=":SingleBlogSlug" element={<BlogSingle />} />
-              </Route>
-              <Route path="contact" element={<Contact />} />
-              <Route path="CandidateDetail" element={<CandidateDetail />} />
-              <Route path="EmployerDetail" element={<EmployerDetail />} />
-
-              {/* ====================================================================== */}
-              {/* ============================= START Guest routes ==================== */}
-              {/* ====================================================================== */}
-
-              <Route element={<GuestRouteGate />}>
-                <Route path="login" element={<Login />} />
-                <Route path="register" element={<Register />} />
-              </Route>
-              {/* ====================================================================== */}
-              {/* ======================== END  Guest routes =========================== */}
-              {/* ====================================================================== */}
-
-              {/* ====================================================================== */}
-              {/* =================== START Auth users Routes ========================== */}
-              {/* ====================================================================== */}
-
-              <Route element={<AuthRouteGate />}>
-                {/* START # Candidate Profile Route /profile with condition */}
-                <Route element={<AuthRolesRouteGate Role="candidate" />}>
-                  <Route path="profile" element={<CandidateProfile />}>
-                    <Route index element={<CandidateInfo />} />
-                    <Route path="CandidateInfo" element={<CandidateInfo />} />
-                    <Route path="AppliedJobs" element={<AppliedJobs />} />
-                    <Route path="SavedJobs" element={<SavedJobs />} />
-                    <Route path="CVManager" element={<CVManager />} />
-                    <Route path="ChangePassword" element={<ChangePassword />} />
-                  </Route>
+            <Route element={<GetAuthUserData />}>
+              <Route path="/" element={<UIIndex />}>
+                <Route index element={<Home />} />
+                <Route path="jobs">
+                  <Route index element={<Jobs />} />
+                  <Route path=":SingleJobId" element={<JobSingle />} />
                 </Route>
-                {/* END # Candidate Profile Route */}
-                {/* START # Employer Profile Route /profile with condition */}
-                <Route element={<AuthRolesRouteGate Role="employer" />}>
-                  <Route path="EmployerProfile" element={<EmployerProfile />}>
-                    <Route index element={<Employerinfo />} />
-                    <Route path="Employerinfo" element={<Employerinfo />} />
-                    <Route path="ManageJobs" element={<ManageJobs />} />
-                    <Route path="PostJobs" element={<PostJobs />} />
-                    <Route path="ChangePassword" element={<ChangePassword />} />
-                  </Route>
+                <Route path="categories" element={<Categories />} />
+                <Route path="blog">
+                  <Route index element={<Blog />} />
+                  <Route path=":SingleBlogSlug" element={<BlogSingle />} />
                 </Route>
-                {/* END # Employer Profile Route */}
-                {/* START # Manager Profile Route /profile with condition */}
-                <Route element={<AuthRolesRouteGate Role="manager" />}>
-                  <Route path="ManagerProfile" element={<ManagerProfile />}>
-                    <Route index element={<VerifyJobs />} />
-                    <Route path="verifyJobs" element={<VerifyJobs />} />
-                  </Route>
-                </Route>
-                {/* END # Manager Profile Route */}
-              </Route>
-              {/* ====================================================================== */}
-              {/* =========================== END  Auth users Routes =================== */}
-              {/* ====================================================================== */}
+                <Route path="contact" element={<Contact />} />
+                <Route path="CandidateDetail" element={<CandidateDetail />} />
+                <Route path="EmployerDetail" element={<EmployerDetail />} />
 
-              <Route path="*" element={<NotFound />} />
+                {/* ====================================================================== */}
+                {/* ============================= START Guest routes ==================== */}
+                {/* ====================================================================== */}
+
+                <Route element={<GuestRouteGate />}>
+                  <Route path="login" element={<Login />} />
+                  <Route path="register" element={<Register />} />
+                </Route>
+                {/* ====================================================================== */}
+                {/* ======================== END  Guest routes =========================== */}
+                {/* ====================================================================== */}
+
+                {/* ====================================================================== */}
+                {/* =================== START Auth users Routes ========================== */}
+                {/* ====================================================================== */}
+
+                <Route element={<AuthRouteGate />}>
+                  {/* START # Candidate Profile Route /profile with condition */}
+                  <Route element={<AuthRolesRouteGate Role="candidate" />}>
+                    <Route path="profile" element={<CandidateProfile />}>
+                      <Route index element={<CandidateInfo />} />
+                      <Route path="CandidateInfo" element={<CandidateInfo />} />
+                      <Route path="AppliedJobs" element={<AppliedJobs />} />
+                      <Route path="SavedJobs" element={<SavedJobs />} />
+                      <Route path="CVManager" element={<CVManager />} />
+                      <Route path="ChangePassword" element={<ChangePassword />} />
+                    </Route>
+                  </Route>
+                  {/* END # Candidate Profile Route */}
+                  {/* START # Employer Profile Route /profile with condition */}
+                  <Route element={<AuthRolesRouteGate Role="employer" />}>
+                    <Route path="EmployerProfile" element={<EmployerProfile />}>
+                      <Route index element={<Employerinfo />} />
+                      <Route path="Employerinfo" element={<Employerinfo />} />
+                      <Route path="ManageJobs" element={<ManageJobs />} />
+                      <Route path="PostJobs" element={<PostJobs />} />
+                      <Route path="ChangePassword" element={<ChangePassword />} />
+                    </Route>
+                  </Route>
+                  {/* END # Employer Profile Route */}
+                  {/* START # Manager Profile Route /profile with condition */}
+                  <Route element={<AuthRolesRouteGate Role="manager" />}>
+                    <Route path="ManagerProfile" element={<ManagerProfile />}>
+                      <Route index element={<VerifyJobs />} />
+                      <Route path="verifyJobs" element={<VerifyJobs />} />
+                    </Route>
+                  </Route>
+                  {/* END # Manager Profile Route */}
+                </Route>
+                {/* ====================================================================== */}
+                {/* =========================== END  Auth users Routes =================== */}
+                {/* ====================================================================== */}
+
+                <Route path="*" element={<NotFound />} />
+              </Route>
+              {/* ############################################################################################## */}
+              {/* END # regular users User interfaces (UI) Routes 'candidates' / 'employers' / 'managers' */}
+              {/* ############################################################################################## */}
+
+              {/* ############################################################################################## */}
+              {/* ########################## START # ADMIN Routes for dashborad ################################ */}
+              {/* ############################################################################################## */}
+
+              <Route element={<AuthRolesRouteGate Role="admin" NavigateTo="/NotFound" />}>
+                <Route path="dashboard" element={<DashBoard />}>
+                  <Route path="/dashboard" element={<h2>Parent Content</h2>} />
+                  <Route path="users" element={<Users />} />
+                  <Route path="*" element={<NotFoundDashboard />} />
+                </Route>
+              </Route>
+              {/* ############################################################################################## */}
+              {/* ############################### END  ADMIN Routes for dashborad ############################## */}
+              {/* ############################################################################################## */}
             </Route>
-            {/* ############################################################################################## */}
-            {/* END # regular users User interfaces (UI) Routes 'candidates' / 'employers' / 'managers' */}
-            {/* ############################################################################################## */}
-
-            {/* ############################################################################################## */}
-            {/* ########################## START # ADMIN Routes for dashborad ################################ */}
-            {/* ############################################################################################## */}
-
-            <Route element={<AuthRolesRouteGate Role="admin" NavigateTo="/NotFound" />}>
-              <Route path="dashboard" element={<DashBoard />}>
-                <Route path="/dashboard" element={<h2>Parent Content</h2>} />
-                <Route path="users" element={<Users />} />
-                <Route path="*" element={<NotFoundDashboard />} />
-              </Route>
-            </Route>
-            {/* ############################################################################################## */}
-            {/* ############################### END  ADMIN Routes for dashborad ############################## */}
-            {/* ############################################################################################## */}
           </Routes>
           {/* auth context end  */}
         </AuthContextProvider>
