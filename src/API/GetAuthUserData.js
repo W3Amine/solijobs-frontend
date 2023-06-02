@@ -2,9 +2,9 @@ import { useEffect } from "react";
 
 import { useAuthContext } from "../Contexts/AuthContext";
 import AxiosClient from "./AxiosClient";
-import { Outlet } from "react-router-dom";
+// import { Outlet } from "react-router-dom";
 
-export default function GetAuthUserData() {
+export default function GetAuthUserData({ children }) {
   const { user, setUser, token } = useAuthContext();
 
   // note that you can watch the token with useEffect but the in login and register
@@ -18,16 +18,16 @@ export default function GetAuthUserData() {
     if (token) {
       AxiosClient.get("/user").then(({ data }) => setUser(data));
 
-      //   const GetUserData = async () => {
-      //     await AxiosClient.get("/user").then(({ data }) => setUser(data));
-      //   };
-      //   GetUserData();
+      // const GetUserData = async () => {
+      //   await AxiosClient.get("/user").then(({ data }) => setUser(data));
+      // };
+      // GetUserData();
     }
   }, [token, setUser]);
 
   if (token && user.id) {
-    return <Outlet />;
+    return <> {children} </>;
   } else if (!token) {
-    return <Outlet />;
+    return <> {children} </>;
   }
 }

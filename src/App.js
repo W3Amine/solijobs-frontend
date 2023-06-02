@@ -55,12 +55,12 @@ function App() {
       <Router>
         {/* auth context provider start */}
         <AuthContextProvider>
-          {/* <GetAuthUserData /> */}
-          <Routes>
-            {/* ############################################################################################## */}
-            {/* START # regular users User interfaces (UI) Routes 'candidates' / 'employers' / 'managers' */}
-            {/* ############################################################################################## */}
-            <Route element={<GetAuthUserData />}>
+          <GetAuthUserData>
+            <Routes>
+              {/* ############################################################################################## */}
+              {/* START # regular users User interfaces (UI) Routes 'candidates' / 'employers' / 'managers' */}
+              {/* ############################################################################################## */}
+              {/* <Route element={<GetAuthUserData />}> */}
               <Route path="/" element={<UIIndex />}>
                 <Route index element={<Home />} />
                 <Route path="jobs">
@@ -149,9 +149,10 @@ function App() {
               {/* ############################################################################################## */}
               {/* ############################### END  ADMIN Routes for dashborad ############################## */}
               {/* ############################################################################################## */}
-            </Route>
-          </Routes>
-          {/* auth context end  */}
+              {/* </Route> */}
+            </Routes>
+            {/* auth context end  */}
+          </GetAuthUserData>
         </AuthContextProvider>
       </Router>
     </>
