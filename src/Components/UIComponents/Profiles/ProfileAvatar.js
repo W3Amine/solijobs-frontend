@@ -2,16 +2,17 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { LogoutRequest } from "../../../API/Composables/LogoutRequest";
 import AuthRolesRenderGate from "../../../AuthGates/RenderingGates/AuthRolesRenderGate";
+import { useAuthContext } from "../../../Contexts/AuthContext";
 
 export default function ProfileAvatar() {
   const { logout } = LogoutRequest();
-
+  const { user } = useAuthContext();
   return (
     <div className="dropdown">
       <div
         style={{
           borderRadius: "50%",
-          backgroundImage: "url(https://t4.ftcdn.net/jpg/02/45/56/35/360_F_245563558_XH9Pe5LJI2kr7VQuzQKAjAbz9PAyejG1.jpg)",
+          backgroundImage:  "url(" + user.profileImage + ")",
           backgroundPosition: "center",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
@@ -92,7 +93,7 @@ export default function ProfileAvatar() {
           </li>
         </AuthRolesRenderGate>
         <li>
-          <button  class="dropdown-item" onClick={logout}>
+          <button class="dropdown-item" onClick={logout}>
             logout
           </button>
         </li>

@@ -16,7 +16,7 @@ export default function GetAuthUserData({ children }) {
 
   useEffect(() => {
     if (token) {
-      AxiosClient.get("/user").then(({ data }) => setUser(data));
+      AxiosClient.get("/user").then(({ data }) => setUser(data.data));
 
       // const GetUserData = async () => {
       //   await AxiosClient.get("/user").then(({ data }) => setUser(data));

@@ -32,7 +32,7 @@ registerPlugin(
 );
 
 export default function SideBarAvatar() {
-  const { token } = useAuthContext();
+  const { token, user } = useAuthContext();
   var files = [
     {
       options: {
@@ -42,7 +42,7 @@ export default function SideBarAvatar() {
         },
         // pass poster property
         metadata: {
-          poster: "https://t4.ftcdn.net/jpg/02/45/56/35/360_F_245563558_XH9Pe5LJI2kr7VQuzQKAjAbz9PAyejG1.jpg",
+          poster: user.profileImage,
         },
       },
     },
