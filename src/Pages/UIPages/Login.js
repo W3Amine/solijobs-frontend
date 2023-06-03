@@ -39,9 +39,9 @@ export default function Login() {
               {/* display server errors here */}
               {ServerErrors && (
                 <div className="alert alert-danger col-md-11 mx-auto" role="alert">
-                  {Object.keys(ServerErrors).map((key) => (
-                    <p className="my-0" key={key}>
-                      {ServerErrors[key][0]}
+                  {ServerErrors.map((error) => (
+                    <p className="my-0" key={error}>
+                      {error}
                     </p>
                   ))}
                 </div>

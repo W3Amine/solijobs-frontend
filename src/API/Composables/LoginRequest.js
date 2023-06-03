@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import { useAuthContext } from "../../Contexts/AuthContext";
 import AxiosClient from "../AxiosClient";
+import { LaravelErrorsHandler } from "../Helpers";
 
 export function LoginRequest() {
   const { setToken } = useAuthContext();
@@ -21,7 +22,7 @@ export function LoginRequest() {
           console.log(response.data.errors);
           // console.log(Object.keys(response.data.errors));
 
-          setServerErrors(response.data.errors);
+          setServerErrors(LaravelErrorsHandler(response.data.errors));
         }
       });
   };

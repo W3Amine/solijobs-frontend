@@ -42,15 +42,17 @@ export default function Register() {
 
           <form onSubmit={RegisterHandler} className="d-flex" id="register">
             <div className="row col-lg-4 col-md-6 mx-auto">
+              {/* display server errors here */}
               {ServerErrors && (
                 <div className="alert alert-danger col-md-11 mx-auto" role="alert">
-                  {Object.keys(ServerErrors).map((key) => (
-                    <p className="my-0" key={key}>
-                      {ServerErrors[key][0]}
+                  {ServerErrors.map((error) => (
+                    <p className="my-0" key={error}>
+                      {error}
                     </p>
                   ))}
                 </div>
               )}
+              {/* server errors end */}
 
               <div className="col-lg-12">
                 <div className="form-group mb-3">
