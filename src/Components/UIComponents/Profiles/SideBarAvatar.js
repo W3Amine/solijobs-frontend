@@ -32,7 +32,7 @@ registerPlugin(
 );
 
 export default function SideBarAvatar() {
-  const { token, user } = useAuthContext();
+  const { token, user, setUser } = useAuthContext();
   var files = [
     {
       options: {
@@ -47,6 +47,18 @@ export default function SideBarAvatar() {
       },
     },
   ];
+  // function that handel the response and put the url in the user profile using setUser
+  const handleFileProcessed = (error, file) => {
+    if (!error) {
+      // Access the server response
+      const response = file.serverId;
+      console.log("Server Response:", JSON.parse(response));
+      setUser({ ...user, profileImage: JSON.parse(response).url });
+    } else {
+      console.error("File processing error:", error);
+    }
+  };
+
   return (
     // <div className="candidate-profile-pic">
     //   <img src="https://i.ibb.co/748qDqm/company.jpg" alt="avatar" />
@@ -69,6 +81,7 @@ export default function SideBarAvatar() {
           },
         },
       }}
+      onprocessfile={(error, file) => handleFileProcessed(error, file)}
       instantUpload={false}
       stylePanelLayout="compact"
       imagePreviewHeight={170}

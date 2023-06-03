@@ -1,17 +1,20 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import SideBarAvatar from "./SideBarAvatar";
+import { useAuthContext } from "../../../Contexts/AuthContext";
 
 export default function EmployerProfileSideBar() {
+  const { user } = useAuthContext();
+
   return (
     <div className="theiaStickySidebar">
       <div className="side-bar-st-1">
         <SideBarAvatar />
         <div className="mid-content text-center">
           <Link to="candidate-detail.html" className="job-title">
-            <h4>Randall Henderson</h4>
+            <h4>{user.name}</h4>
           </Link>
-          <p>IT Contractor</p>
+          <p>Employer</p>
         </div>
         <div className="nav-list-1">
           <ul>
