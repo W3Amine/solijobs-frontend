@@ -17,13 +17,6 @@ export function RegisterRequest() {
 
         if (response.status === 422) {
           console.log(response.data.errors);
-          // console.log(Object.keys(response.data.errors));
-          let TheErrors = [];
-          for (const key in response.data.errors) {
-            for (const errorKey in response.data.errors[key]) {
-              TheErrors.push(response.data.errors[key][errorKey]);
-            }
-          }
           setServerErrors(LaravelErrorsHandler(response.data.errors));
         }
       });
