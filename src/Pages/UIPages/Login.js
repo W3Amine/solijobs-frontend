@@ -49,12 +49,12 @@ export default function Login() {
               {/* server errors end */}
               <div className="col-lg-12">
                 <div className="form-group mb-3">
-                  <input ref={EmailInput} name="email" type="text" required="" className="form-control" placeholder="email*" />
+                  <input ref={EmailInput} type="email" required="" className="form-control" placeholder="email*" />
                 </div>
               </div>
               <div className="col-lg-12">
                 <div className="form-group mb-3">
-                  <input ref={PasswordInput} name="password" type="password" className="form-control" required="" placeholder="Password*" />
+                  <input ref={PasswordInput} type="password" className="form-control" required="" placeholder="Password*" />
                 </div>
               </div>
               <div className="col-lg-12">

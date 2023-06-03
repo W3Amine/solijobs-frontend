@@ -2,10 +2,14 @@ import React from "react";
 import SinglePageHeader from "../../../Components/UIComponents/SinglePageHeader";
 import ManagerProfileSideBar from "../../../Components/UIComponents/Profiles/ManagerProfileSideBar";
 import { Outlet } from "react-router-dom";
+import { useAuthContext } from "../../../Contexts/AuthContext";
+
 export default function ManagerProfile() {
+  const { user } = useAuthContext();
+
   return (
     <>
-      <SinglePageHeader PageTitle="Welcome , User name" />
+      <SinglePageHeader PageTitle={"Welcome , " + user.name} />
       <div className="section-full p-t120 p-b90 site-bg-white">
         <div className="container">
           <div className="row">
