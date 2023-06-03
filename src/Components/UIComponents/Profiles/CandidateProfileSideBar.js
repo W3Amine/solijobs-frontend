@@ -1,17 +1,12 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
+import SideBarAvatar from "./SideBarAvatar";
+
 export default function CandidateProfileSidebar() {
   return (
     <div className="theiaStickySidebar">
       <div className="side-bar-st-1">
-        <div className="candidate-profile-pic">
-          <img src="https://i.ibb.co/748qDqm/company.jpg" alt="avatar" />
-          <div className="upload-btn-wrapper">
-            <div id="upload-image-grid" />
-            <button className="site-button button-sm">Upload Photo</button>
-            <input type="file" name="myfile" id="file-uploader" accept=".jpg, .jpeg, .png" />
-          </div>
-        </div>
+        <SideBarAvatar />
         <div className="mid-content text-center">
           <Link href="candidate-detail.html" className="job-title">
             <h4>Randall Henderson</h4>
