@@ -1,8 +1,43 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import GetEmployerData from "../../../../API/Composables/GetEmployerData";
+import { useAuthContext } from "../../../../Contexts/AuthContext";
 
 export default function Employerinfo() {
+  const { user } = useAuthContext();
+  const { GetTheEmployerData, EmployerData } = GetEmployerData();
+    GetTheEmployerData();
+
+  // useEffect(() => {
+  //   GetTheEmployerData();
+  //   console.log("33333333333333333333333333333333333333333333333333333");
+  //   console.log(EmployerData);
+  //   console.log("33333333333333333333333333333333333333333333333333333");
+  // }, []);
+
+  const nameInput = useRef();
+  const phoneNumberInput = useRef();
+  const emailInput = useRef();
+  const websiteInput = useRef();
+  const aboutInput = useRef();
+  const facebookInput = useRef();
+  const twitterInput = useRef();
+
+  function EmployerProfileUpdateHandler(e) {
+    e.preventDefault();
+    const EmployerUpdateData = {
+      name: nameInput.current.value,
+      phoneNumber: phoneNumberInput.current.value,
+      email: emailInput.current.value,
+      website: websiteInput.current.value,
+      about: aboutInput.current.value,
+      facebook: facebookInput.current.value,
+      twitter: twitterInput.current.value,
+    };
+
+    console.log(EmployerUpdateData);
+  }
   return (
-    <form>
+    <form onSubmit={EmployerProfileUpdateHandler}>
       {/*Basic Information*/}
       <div className="panel panel-default">
         <div className="panel-heading wt-panel-heading p-a20">
@@ -14,7 +49,7 @@ export default function Employerinfo() {
               <div className="form-group">
                 <label>Company Name</label>
                 <div className="ls-inputicon-box">
-                  <input className="form-control" name="company_name" type="text" placeholder="Devid Smith" />
+                  <input value={user.name} ref={nameInput} type="text" className="form-control" placeholder="Devid Smith" />
                   <i className="fs-input-icon fa fa-building" />
                 </div>
               </div>
@@ -23,7 +58,7 @@ export default function Employerinfo() {
               <div className="form-group">
                 <label>Phone</label>
                 <div className="ls-inputicon-box">
-                  <input className="form-control" name="company_phone" type="text" placeholder="(251) 1234-456-7890" />
+                  <input value={user.phoneNumber} ref={phoneNumberInput} className="form-control" type="text" placeholder="(251) 1234-456-7890" />
                   <i className="fs-input-icon fa fa-phone-alt" />
                 </div>
               </div>
@@ -32,7 +67,7 @@ export default function Employerinfo() {
               <div className="form-group">
                 <label>Email Address</label>
                 <div className="ls-inputicon-box">
-                  <input className="form-control" name="company_Email" type="email" placeholder="Devid@example.com" />
+                  <input value={user.email} ref={emailInput} className="form-control" type="email" placeholder="Devid@example.com" />
                   <i className="fs-input-icon fas fa-at" />
                 </div>
               </div>
@@ -41,16 +76,16 @@ export default function Employerinfo() {
               <div className="form-group">
                 <label>Website</label>
                 <div className="ls-inputicon-box">
-                  <input className="form-control" name="company_website" type="text" placeholder="https://devsmith.net/" />
+                  <input value={EmployerData.website} ref={websiteInput} className="form-control" type="text" placeholder="https://devsmith.net/" />
                   <i className="fs-input-icon fa fa-globe-americas" />
                 </div>
               </div>
             </div>
-            <div className="col-xl-4 col-lg-6 col-md-12">
+            {/* <div className="col-xl-4 col-lg-6 col-md-12">
               <div className="form-group city-outer-bx has-feedback">
                 <label>Country</label>
                 <div className="ls-inputicon-box">
-                  <input className="form-control" name="company_since" type="text" placeholder="USA" />
+                  <input className="form-control"  type="text" placeholder="USA" />
                   <i className="fs-input-icon fa fa-globe-americas" />
                 </div>
               </div>
@@ -81,23 +116,12 @@ export default function Employerinfo() {
                   <i className="fs-input-icon fas fa-map-marker-alt" />
                 </div>
               </div>
-            </div>
+            </div> */}
             <div className="col-xl-12 col-lg-12 col-md-12"></div>
             <div className="col-md-12">
               <div className="form-group">
-                <label>Description</label>
-                <textarea
-                  className="form-control"
-                  rows={3}
-                  defaultValue={"Greetings! when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries."}
-                />
-              </div>
-            </div>
-            <div className="col-lg-12 col-md-12">
-              <div className="text-left">
-                <button type="submit" className="site-button">
-                  Save Changes
-                </button>
+                <label>About</label>
+                <textarea value={EmployerData.about} ref={aboutInput} className="form-control" rows={3} />
               </div>
             </div>
           </div>
@@ -114,7 +138,7 @@ export default function Employerinfo() {
               <div className="form-group">
                 <label>Facebook</label>
                 <div className="ls-inputicon-box">
-                  <input className="form-control wt-form-control" name="company_name" type="text" placeholder="https://www.facebook.com/" />
+                  <input value={EmployerData.facebook} ref={facebookInput} className="form-control wt-form-control" type="text" placeholder="https://www.facebook.com/" />
                   <i className="fs-input-icon fab fa-facebook-f" />
                 </div>
               </div>
@@ -123,12 +147,12 @@ export default function Employerinfo() {
               <div className="form-group">
                 <label>Twitter</label>
                 <div className="ls-inputicon-box">
-                  <input className="form-control wt-form-control" name="company_name" type="text" placeholder="https://twitter.com/" />
+                  <input value={EmployerData.twitter} ref={twitterInput} className="form-control wt-form-control" type="text" placeholder="https://twitter.com/" />
                   <i className="fs-input-icon fab fa-twitter" />
                 </div>
               </div>
             </div>
-            <div className="col-xl-4 col-lg-6 col-md-12">
+            {/* <div className="col-xl-4 col-lg-6 col-md-12">
               <div className="form-group">
                 <label>linkedin</label>
                 <div className="ls-inputicon-box">
@@ -181,7 +205,7 @@ export default function Employerinfo() {
                   <i className="fs-input-icon fab fa-youtube" />
                 </div>
               </div>
-            </div>
+            </div> */}
             <div className="col-lg-12 col-md-12">
               <div className="text-left">
                 <button type="submit" className="site-button">
