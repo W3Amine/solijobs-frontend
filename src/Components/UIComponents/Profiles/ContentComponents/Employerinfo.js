@@ -5,14 +5,14 @@ import { useAuthContext } from "../../../../Contexts/AuthContext";
 export default function Employerinfo() {
   const { user } = useAuthContext();
   const { GetTheEmployerData, EmployerData } = GetEmployerData();
-    GetTheEmployerData();
+  // GetTheEmployerData();
 
-  // useEffect(() => {
-  //   GetTheEmployerData();
-  //   console.log("33333333333333333333333333333333333333333333333333333");
-  //   console.log(EmployerData);
-  //   console.log("33333333333333333333333333333333333333333333333333333");
-  // }, []);
+  useEffect(() => {
+    GetTheEmployerData();
+    console.log("33333333333333333333333333333333333333333333333333333");
+    console.log(EmployerData);
+    console.log("33333333333333333333333333333333333333333333333333333");
+  }, []);
 
   const nameInput = useRef();
   const phoneNumberInput = useRef();
@@ -36,6 +36,11 @@ export default function Employerinfo() {
 
     console.log(EmployerUpdateData);
   }
+
+  if (!EmployerData) {
+    return null;
+  }
+
   return (
     <form onSubmit={EmployerProfileUpdateHandler}>
       {/*Basic Information*/}
