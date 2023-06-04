@@ -6,11 +6,12 @@ import SinglePageHeader from "../../Components/UIComponents/SinglePageHeader";
 import googleicon from "../../Assets/images/other/google-icon.png";
 
 import { LoginRequest } from "../../API/Composables/LoginRequest";
+import ErrorMessages from "../../Components/Alerts/ErrorMessages";
 
 export default function Login() {
   const EmailInput = useRef();
   const PasswordInput = useRef();
-  const { login, ServerErrors } = LoginRequest();
+  const { login, ServerErrors, setServerErrors } = LoginRequest();
 
   function LoginHandler(e) {
     e.preventDefault();
@@ -20,6 +21,7 @@ export default function Login() {
     };
 
     console.log(LoginData);
+    setServerErrors(null);
     login(LoginData);
   }
 
@@ -37,15 +39,7 @@ export default function Login() {
           <form onSubmit={LoginHandler} className="d-flex" id="login">
             <div className="row  col-lg-4 col-md-6 mx-auto">
               {/* display server errors here */}
-              {ServerErrors && (
-                <div className="alert alert-danger col-md-11 mx-auto" role="alert">
-                  {ServerErrors.map((error) => (
-                    <p className="my-0" key={error}>
-                      {error}
-                    </p>
-                  ))}
-                </div>
-              )}
+              <ErrorMessages errors={ServerErrors} />
               {/* server errors end */}
               <div className="col-lg-12">
                 <div className="form-group mb-3">

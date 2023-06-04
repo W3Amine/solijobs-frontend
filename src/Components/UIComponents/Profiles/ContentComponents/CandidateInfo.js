@@ -1,4 +1,7 @@
 import React from "react";
+import { useAuthContext } from "../../../../Contexts/AuthContext";
+import ErrorMessages from "../../../Alerts/ErrorMessages";
+import SuccessMessages from "../../../Alerts/SuccessMessages";
 
 export default function CandidateInfo() {
   return (

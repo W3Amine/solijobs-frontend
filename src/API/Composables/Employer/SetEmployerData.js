@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { useAuthContext } from "../../Contexts/AuthContext";
-import AxiosClient from "../AxiosClient";
-import { LaravelErrorsHandler } from "../Helpers";
+import { useAuthContext } from "../../../Contexts/AuthContext";
+import AxiosClient from "../../AxiosClient";
+
+import { LaravelErrorsHandler } from "../../Helpers";
 
 export default function SetEmployerData() {
   const [ServerErrors, setServerErrors] = useState();

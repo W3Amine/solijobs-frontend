@@ -10,8 +10,8 @@ export default function ChangePasswordRequest() {
     AxiosClient.post("/ChangePassword", ChangePasswordData)
       .then(({ data }) => {
         //setToken(data.token);
-        console.log("success" + data);
         setServerSuccessMessage(data);
+        console.log(data);
       })
       .catch((err) => {
         const response = err.response;
@@ -24,5 +24,5 @@ export default function ChangePasswordRequest() {
       });
   };
 
-  return { ChangeThePassword, ServerErrors, ServerSuccessMessage };
+  return { ChangeThePassword, ServerErrors, setServerErrors, ServerSuccessMessage, setServerSuccessMessage };
 }

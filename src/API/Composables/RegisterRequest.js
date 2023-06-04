@@ -22,5 +22,5 @@ export function RegisterRequest() {
       });
   };
 
-  return { register, ServerErrors };
+  return { register, ServerErrors, setServerErrors };
 }

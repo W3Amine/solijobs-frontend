@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import SinglePageHeader from "../../Components/UIComponents/SinglePageHeader";
 import googleicon from "../../Assets/images/other/google-icon.png";
 import { RegisterRequest } from "../../API/Composables/RegisterRequest";
+import ErrorMessages from "../../Components/Alerts/ErrorMessages";
 
 export default function Register() {
   const FullNameInput = useRef();
@@ -12,7 +13,7 @@ export default function Register() {
   const RePasswordInput = useRef();
   const RoleInput = useRef();
 
-  const { register, ServerErrors } = RegisterRequest();
+  const { register, ServerErrors, setServerErrors } = RegisterRequest();
 
   function RegisterHandler(e) {
     e.preventDefault();
@@ -26,6 +27,7 @@ export default function Register() {
     };
 
     console.log(RegisterData);
+    setServerErrors(null);
     register(RegisterData);
   }
 
@@ -43,15 +45,7 @@ export default function Register() {
           <form onSubmit={RegisterHandler} className="d-flex" id="register">
             <div className="row col-lg-4 col-md-6 mx-auto">
               {/* display server errors here */}
-              {ServerErrors && (
-                <div className="alert alert-danger col-md-11 mx-auto" role="alert">
-                  {ServerErrors.map((error) => (
-                    <p className="my-0" key={error}>
-                      {error}
-                    </p>
-                  ))}
-                </div>
-              )}
+              <ErrorMessages errors={ServerErrors} />
               {/* server errors end */}
 
               <div className="col-lg-12">

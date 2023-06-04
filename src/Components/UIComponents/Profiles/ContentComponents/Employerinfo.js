@@ -1,7 +1,9 @@
 import React, { useEffect, useRef } from "react";
-import GetEmployerData from "../../../../API/Composables/GetEmployerData";
-import SetEmployerData from "../../../../API/Composables/SetEmployerData";
+import GetEmployerData from "../../../../API/Composables/Employer/GetEmployerData";
+import SetEmployerData from "../../../../API/Composables/Employer/SetEmployerData";
 import { useAuthContext } from "../../../../Contexts/AuthContext";
+import ErrorMessages from "../../../Alerts/ErrorMessages";
+import SuccessMessages from "../../../Alerts/SuccessMessages";
 
 export default function Employerinfo() {
   const { user } = useAuthContext();
@@ -10,9 +12,6 @@ export default function Employerinfo() {
   const { SetTheEmployerData, ServerErrors, setServerErrors, ServerSuccessMessage, setServerSuccessMessage } = SetEmployerData();
   useEffect(() => {
     GetTheEmployerData();
-    console.log("33333333333333333333333333333333333333333333333333333");
-    console.log(EmployerData);
-    console.log("33333333333333333333333333333333333333333333333333333");
   }, []);
 
   const nameInput = useRef();
@@ -55,24 +54,11 @@ export default function Employerinfo() {
         </div>
         <div className="panel-body wt-panel-body p-a20 m-b30">
           {/* display server success message here */}
-          {ServerSuccessMessage && (
-            <div className="alert alert-success col-md-11 mx-auto" role="alert">
-              <p className="my-0">{ServerSuccessMessage}</p>
-            </div>
-          )}
+          <SuccessMessages message={ServerSuccessMessage} />
           {/* server server success message end */}
           {/* display server errors here */}
-          {ServerErrors && (
-            <div className="alert alert-danger col-md-11 mx-auto" role="alert">
-              {ServerErrors.map((error) => (
-                <p className="my-0" key={error}>
-                  {error}
-                </p>
-              ))}
-            </div>
-          )}
+          <ErrorMessages errors={ServerErrors} />
           {/* server errors end */}
-
           <div className="row">
             <div className="col-xl-6 col-lg-6 col-md-12">
               <div className="form-group">

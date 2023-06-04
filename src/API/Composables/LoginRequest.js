@@ -27,5 +27,5 @@ export function LoginRequest() {
       });
   };
 
-  return { login, ServerErrors };
+  return { login, ServerErrors, setServerErrors };
 }

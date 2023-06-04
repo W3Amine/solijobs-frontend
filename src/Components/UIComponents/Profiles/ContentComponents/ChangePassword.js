@@ -1,12 +1,14 @@
 import React, { useRef } from "react";
 import ChangePasswordRequest from "../../../../API/Composables/ChangePasswordRequest";
+import ErrorMessages from "../../../Alerts/ErrorMessages";
+import SuccessMessages from "../../../Alerts/SuccessMessages";
 
 export default function ChangePassword() {
   const passwordInput = useRef();
   const new_password_Input = useRef();
   const new_password_confirmation_Input = useRef();
 
-  const { ChangeThePassword, ServerErrors, ServerSuccessMessage } = ChangePasswordRequest();
+  const { ChangeThePassword, ServerErrors, setServerErrors, ServerSuccessMessage, setServerSuccessMessage } = ChangePasswordRequest();
   function ChangePasswordHandler(e) {
     e.preventDefault();
 
@@ -17,6 +19,8 @@ export default function ChangePassword() {
     };
 
     console.log(ChangePasswordData);
+    setServerErrors(null);
+    setServerSuccessMessage(null);
     ChangeThePassword(ChangePasswordData);
   }
 
@@ -30,22 +34,10 @@ export default function ChangePassword() {
 
         <form onSubmit={ChangePasswordHandler} className="panel-body wt-panel-body p-a20">
           {/* display server success message here */}
-          {ServerSuccessMessage && (
-            <div className="alert alert-success col-md-11 mx-auto" role="alert">
-              <p className="my-0">{ServerSuccessMessage}</p>
-            </div>
-          )}
+          <SuccessMessages message={ServerSuccessMessage} />
           {/* server server success message end */}
           {/* display server errors here */}
-          {ServerErrors && (
-            <div className="alert alert-danger col-md-11 mx-auto" role="alert">
-              {ServerErrors.map((error) => (
-                <p className="my-0" key={error}>
-                  {error}
-                </p>
-              ))}
-            </div>
-          )}
+          <ErrorMessages errors={ServerErrors} />
           {/* server errors end */}
 
           <div className="row">
