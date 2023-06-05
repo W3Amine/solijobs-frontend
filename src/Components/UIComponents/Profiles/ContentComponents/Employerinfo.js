@@ -10,6 +10,7 @@ export default function Employerinfo() {
   const { GetTheEmployerData, EmployerData } = GetEmployerData();
   // GetTheEmployerData();
   const { SetTheEmployerData, ServerErrors, setServerErrors, ServerSuccessMessage, setServerSuccessMessage } = SetEmployerData();
+ 
   useEffect(() => {
     GetTheEmployerData();
   }, []);
