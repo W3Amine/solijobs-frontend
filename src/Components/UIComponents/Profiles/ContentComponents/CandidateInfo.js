@@ -132,7 +132,7 @@ export default function CandidateInfo() {
             <div className="col-xl-6 col-lg-6 col-md-12">
               <div className="form-group mb-3">
                 <label>Job Category</label>
-                <select defaultValue={CandidateData.category_id} ref={category_idInput} className="w-100 py-3">
+                <select defaultValue={CandidateData.category_id} ref={category_idInput} className="w-100">
                   {AllCategories &&
                     AllCategories.map((category) => (
                       <option key={category.id} value={category.id}>
@@ -146,7 +146,7 @@ export default function CandidateInfo() {
             <div className="col-xl-6 col-lg-6 col-md-12">
               <div className="form-group mb-3">
                 <label>Gender</label>
-                <select defaultValue={CandidateData.gender} ref={genderInput} className="w-100 py-3">
+                <select defaultValue={CandidateData.gender} ref={genderInput} className="w-100">
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
                 </select>

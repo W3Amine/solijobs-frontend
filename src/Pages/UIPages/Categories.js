@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SinglePageHeader from "../../Components/UIComponents/SinglePageHeader";
 import CategoriesSection from "../../Components/UIComponents/CategoriesSection";
 import BigTitle from "../../Components/UIComponents/BigTitle";
 import Pagination from "../../Components/UIComponents/Pagination";
+
 export default function Categories() {
+  useEffect(() => {
+    document.title = "categories";
+  }, []);
+
   return (
     <>
       <SinglePageHeader PageTitle="Categories  lol xd" />
@@ -21,7 +26,7 @@ export default function Categories() {
               <CategoriesSection />
               {/* END # JOBS CATEGORIES SECTION Component */}
             </div>
-          <Pagination />
+            <Pagination />
           </div>
         </div>
       </div>

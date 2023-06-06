@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import Categories from "../../../../API/Composables/Categories/Categories";
+import { countriesData } from "../../../../API/Jobs/countriesData";
 import CreateJob from "../../../../API/Jobs/CreateJob";
 import ErrorMessages from "../../../Alerts/ErrorMessages";
 import SuccessMessages from "../../../Alerts/SuccessMessages";
@@ -21,6 +22,8 @@ export default function PostJobs() {
   const experienceInput = useRef();
   const qualificationInput = useRef();
   const addressInput = useRef();
+  const countryInput = useRef();
+  const cityInput = useRef();
 
   function JobCreateHandler(e) {
     e.preventDefault();
@@ -28,7 +31,7 @@ export default function PostJobs() {
       title: titleInput.current.value,
       category_id: category_id_Input.current.value,
       // location_id: location_id_Input.current.value,
-      location_id: 5,
+      // location_id: 5,
       description: descriptionInput.current.value,
       salary: +salaryInput.current.value,
       type: typeInput.current.value,
@@ -36,6 +39,8 @@ export default function PostJobs() {
       experience: experienceInput.current.value,
       qualification: qualificationInput.current.value,
       address: addressInput.current.value,
+      country: countryInput.current.value,
+      city: cityInput.current.value,
     };
 
     console.log(JobData);
@@ -83,7 +88,7 @@ export default function PostJobs() {
             <div className="col-xl-4 col-lg-6 col-md-12">
               <div className="form-group mb-3">
                 <label>Job Category</label>
-                <select ref={category_id_Input} className="w-100 py-3">
+                <select ref={category_id_Input} className="w-100">
                   <option className="bs-title-option" value="">
                     Select Category
                   </option>
@@ -100,7 +105,7 @@ export default function PostJobs() {
             <div className="col-xl-4 col-lg-6 col-md-12">
               <div className="form-group mb-3">
                 <label>Job Type</label>
-                <select ref={typeInput} className="w-100 py-3">
+                <select ref={typeInput} className="w-100">
                   <option className="bs-title-option" value="">
                     Select Type
                   </option>
@@ -146,7 +151,7 @@ export default function PostJobs() {
             <div className="col-xl-4 col-lg-6 col-md-12">
               <div className="form-group mb-3">
                 <label>Gender</label>
-                <select ref={genderInput} className="w-100 py-3">
+                <select ref={genderInput} className="w-100">
                   <option className="bs-title-option" value="">
                     Select Gender
                   </option>
@@ -160,34 +165,28 @@ export default function PostJobs() {
             <div className="col-xl-4 col-lg-6 col-md-12">
               <div className="form-group mb-3">
                 <label>Job Country</label>
-                <select ref={location_id_Input} className="w-100 py-3">
+                <select ref={countryInput} className="w-100">
                   <option className="bs-title-option" value="">
                     Select Country
                   </option>
-                  {AllCategories &&
-                    AllCategories.map((category) => (
-                      <option key={category.id} value={category.id}>
-                        {category.name}
+                  {countriesData &&
+                    countriesData.map((country) => (
+                      <option key={country} value={country}>
+                        {country}
                       </option>
                     ))}
                 </select>
               </div>
             </div>
             {/*City*/}
+
             <div className="col-xl-4 col-lg-6 col-md-12">
-              <div className="form-group mb-3">
+              <div className="form-group">
                 <label>Job City</label>
-                <select ref={location_id_Input} className="w-100 py-3">
-                  <option className="bs-title-option" value="">
-                    Select City
-                  </option>
-                  {AllCategories &&
-                    AllCategories.map((category) => (
-                      <option key={category.id} value={category.id}>
-                        {category.name}
-                      </option>
-                    ))}
-                </select>
+                <div className="ls-inputicon-box">
+                  <input ref={cityInput} className="form-control" type="text" placeholder="Job City" />
+                  <i className="fs-input-icon fa fa-user-graduate" />
+                </div>
               </div>
             </div>
 

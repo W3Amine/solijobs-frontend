@@ -71,7 +71,7 @@ export default function Register() {
 
               <div className="col-lg-12">
                 <div className="form-group mb-3">
-                  <select ref={RoleInput} className="w-100 py-3">
+                  <select ref={RoleInput} className="w-100">
                     <option value="2">Candidate</option>
                     <option value="3">Employer</option>
                   </select>

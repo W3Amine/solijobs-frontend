@@ -5370,6 +5370,13 @@ ol li {
     display: block;
   }
 }
+
+select {
+  border: 1px solid var(--primarycolor) !important;
+  padding: 20px !important;
+  border-radius: 10px !important ;
+}
+
 .ftr-nw-content .ftr-nw-form .form-control {
   height: 66px;
   border: 0px;
