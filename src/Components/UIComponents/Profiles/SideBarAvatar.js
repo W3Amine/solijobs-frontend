@@ -59,6 +59,9 @@ export default function SideBarAvatar() {
     }
   };
 
+  // if (!user) {
+  //   return "loading";
+  // }
   return (
     // <div className="candidate-profile-pic">
     //   <img src="https://i.ibb.co/748qDqm/company.jpg" alt="avatar" />

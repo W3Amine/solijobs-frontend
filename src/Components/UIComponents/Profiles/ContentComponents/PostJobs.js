@@ -13,7 +13,7 @@ export default function PostJobs() {
   }, []);
 
   const category_id_Input = useRef();
-  const location_id_Input = useRef();
+  // const location_id_Input = useRef();
   const titleInput = useRef();
   const descriptionInput = useRef();
   const salaryInput = useRef();

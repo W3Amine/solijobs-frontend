@@ -78,11 +78,7 @@ export default function ProfileAvatar() {
             </Link>
           </li>
 
-          <li>
-            <Link class="dropdown-item" to="/EmployerProfile/Employerinfo">
-              Company Profile
-            </Link>
-          </li>
+
         </AuthRolesRenderGate>
 
         <AuthRolesRenderGate Role="admin">

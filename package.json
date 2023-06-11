@@ -19,6 +19,7 @@
     "filepond-plugin-image-resize": "^2.0.10",
     "filepond-plugin-image-transform": "^3.8.7",
     "filepond-plugin-pdf-preview": "^1.0.4",
+    "html-react-parser": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-filepond": "^7.1.2",
