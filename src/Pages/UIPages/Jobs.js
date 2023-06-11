@@ -10,7 +10,22 @@ import { useSearchParams } from "react-router-dom";
 export default function Jobs() {
   const [SearchParams, setSearchParams] = useSearchParams();
 
-  console.log(SearchParams);
+  console.log(Object.fromEntries([...SearchParams]));
+
+  // setSearchParams({ filter: "true" });
+  const SearchParamsObject = Object.fromEntries([...SearchParams]);
+
+  function setPageSearchParams(data) {
+    setSearchParams({ ...SearchParamsObject, page: data });
+  }
+  function setShowSearchParams(data) {
+    setSearchParams({ ...SearchParamsObject, page: 1, show: data });
+  }
+
+  function setTypeSearchParams(data) {
+    setSearchParams({ ...SearchParamsObject, page: 1, type: data });
+  }
+
   const { GetActiveJobs, ActiveJobsData } = JobsApi();
 
   const [Page, setPage] = useState("1");
@@ -27,18 +42,18 @@ export default function Jobs() {
 
   useEffect(() => {
     if (Page) {
-      var pageParameter = "?page=" + Page;
+      var pageParameter = "?page=" + (SearchParams.get("page") ? SearchParams.get("page") : Page);
     }
     if (Show) {
-      var ShowParameter = "&show=" + Show;
+      var ShowParameter = "&show=" + (SearchParams.get("show") ? SearchParams.get("show") : Show);
     }
-    if (Type) {
-      var TypeParameter = "&type=" + Type;
+    if (Type || SearchParams.get("type")) {
+      var TypeParameter = "&type=" + (SearchParams.get("type") ? SearchParams.get("type") : Type);
     } else {
       TypeParameter = "";
     }
     GetActiveJobs(pageParameter, ShowParameter, TypeParameter);
-  }, [Page, Show, Type]);
+  }, [Page, Show, Type, SearchParams]);
 
   if (!ActiveJobsData) {
     return "loading ...";
@@ -55,9 +70,9 @@ export default function Jobs() {
               <JobPostSearchSideBar />
             </div>
             <div className="col-lg-8 col-md-12">
-              <FilterSortBy total={ActiveJobsData.meta.total} setShow={setShow} ShowValue={Show} setType={setType} Type={Type} />
+              <FilterSortBy total={ActiveJobsData.meta.total} setShow={setShowSearchParams} ShowValue={SearchParams.get("show")} setType={setTypeSearchParams} Type={SearchParams.get("type")} />
               <JobsList Jobsdata={ActiveJobsData.data} usage="Save" />
-              <Pagination changePage={setPage} PaginationData={ActiveJobsData.meta.links} />
+              <Pagination changePage={setPageSearchParams} PaginationData={ActiveJobsData.meta.links} />
             </div>
           </div>
         </div>
