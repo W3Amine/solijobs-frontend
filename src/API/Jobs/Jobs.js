@@ -7,6 +7,13 @@ export default function Jobs() {
   const [ActiveJobsData, setActiveJobsData] = useState();
   const [AppliedJobsData, setAppliedJobsData] = useState();
   const [SavedJobsData, setSavedJobsData] = useState();
+  const [JobDetails, setJobDetails] = useState();
+
+  const GetJobDetails = async (id) => {
+    await AxiosClient.get("/jobs/GetJobDetails/" + id).then(({ data }) => {
+      setJobDetails(data[0]);
+    });
+  };
 
   const GetEmployerJobs = async (PageParameter, ShowParameter, TypeParameter) => {
     await AxiosClient.get("/jobs/EmployerJobs" + PageParameter + ShowParameter + TypeParameter).then(({ data }) => {
@@ -20,8 +27,8 @@ export default function Jobs() {
     });
   };
 
-  const GetActiveJobs = async (PageParameter, ShowParameter, TypeParameter) => {
-    await AxiosClient.get("/jobs/GetActiveJobs" + PageParameter + ShowParameter + TypeParameter).then(({ data }) => {
+  const GetActiveJobs = async (PageParameter, ShowParameter, TypeParameter, CategoryParameter, SearchParameter, CountryParameter) => {
+    await AxiosClient.get("/jobs/GetActiveJobs" + PageParameter + ShowParameter + TypeParameter + CategoryParameter + SearchParameter + CountryParameter).then(({ data }) => {
       setActiveJobsData(data);
     });
   };
@@ -39,6 +46,8 @@ export default function Jobs() {
   };
 
   return {
+    GetJobDetails,
+    JobDetails,
     GetEmployerJobs,
     EmployerJobsData,
     GetUnactiveJobs,

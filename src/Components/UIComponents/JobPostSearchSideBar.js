@@ -1,6 +1,22 @@
-import React from "react";
+import React, { useRef } from "react";
 
-export default function JobPostSearchSideBar() {
+export default function JobPostSearchSideBar({ AllCategories, setCategory, categoryValue, setSearch, searchValue, setCountry, countryValue }) {
+  const Category = useRef("");
+  const Search = useRef("");
+  const Country = useRef("");
+
+  function CategoryOnChange() {
+    setCategory(Category.current.value);
+  }
+
+  function SearchOnChange() {
+    setSearch(Search.current.value);
+  }
+
+  function CountryOnChange() {
+    setCountry(Country.current.value);
+  }
+
   return (
     <div className="theiaStickySidebar">
       <div className="side-bar">
@@ -9,33 +25,49 @@ export default function JobPostSearchSideBar() {
             <div className="form-group mb-4">
               <h4 className="section-head-small mb-4">Category</h4>
               <div className="dropdown bootstrap-select wt-select-bar-large">
-                <select className="wt-select-bar-large selectpicker" data-live-search="true" data-bv-field="size">
-                  <option>All Category</option>
-                  <option>Web Designer</option>
-                  <option>Developer</option>
-                  <option>Acountant</option>
+                <select ref={Category} defaultValue={categoryValue} onChange={CategoryOnChange} className="w-100">
+                  <option className="bs-title-option" value="">
+                    Select Category
+                  </option>
+                  {AllCategories &&
+                    AllCategories.map((category) => (
+                      <option key={category.id} value={category.id}>
+                        {category.name}
+                      </option>
+                    ))}
                 </select>
 
-                <div className="dropdown-menu ">
+                {/* <div className="dropdown-menu ">
                   <div className="bs-searchbox">
-                    <input type="search" className="form-control" autoComplete="off" role="combobox" aria-label="Search" aria-controls="bs-select-1" aria-autocomplete="list" />
+                    <input
+                      ref={Type}
+                      defaultValue={TypeValue}
+                      onChange={TypeOnChange}
+                      type="search"
+                      className="form-control"
+                      autoComplete="off"
+                      role="combobox"
+                      aria-label="Search"
+                      aria-controls="bs-select-1"
+                      aria-autocomplete="list"
+                    />
                   </div>
                   <div className="inner show" role="listbox" id="bs-select-1" tabIndex={-1}>
                     <ul className="dropdown-menu inner show" role="presentation" />
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
             <div className="form-group mb-4">
               <h4 className="section-head-small mb-4">Keyword</h4>
               <div className="input-group">
-                <input type="text" className="form-control" placeholder="Job Title or Keyword" />
+                <input type="text" ref={Search} defaultValue={searchValue} onChange={SearchOnChange} className="form-control" placeholder="Job Title or Keyword" />
               </div>
             </div>
             <div className="form-group mb-4">
-              <h4 className="section-head-small mb-4">Location</h4>
+              <h4 className="section-head-small mb-4">Country</h4>
               <div className="input-group">
-                <input type="text" className="form-control" placeholder="Search location" />
+                <input type="text" ref={Country} defaultValue={countryValue} onChange={CountryOnChange} className="form-control" placeholder="Search Country" />
               </div>
             </div>
             <div className="sidebar-ele-filter">
