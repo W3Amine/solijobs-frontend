@@ -89,7 +89,7 @@ export default function JobItem({ usage, JobData }) {
                           </Link>
                         </li>
                         <li>
-                          <Link className="dropdown-item" to={"/EmployerProfile/appliedCandidates/" + JobData.id}>
+                          <Link className="dropdown-item" to={"/EmployerProfile/Applyers/" + JobData.id}>
                             <i className="fa-regular fa-eye me-2" />
                             applied candidates
                           </Link>

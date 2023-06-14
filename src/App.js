@@ -41,12 +41,14 @@ import Employerinfo from "./Components/UIComponents/Profiles/ContentComponents/E
 import ManageJobs from "./Components/UIComponents/Profiles/ContentComponents/ManageJobs";
 import PostJobs from "./Components/UIComponents/Profiles/ContentComponents/PostJobs";
 import VerifyJobs from "./Components/UIComponents/Profiles/ContentComponents/VerifyJobs";
+
 // END # regular users Pages 'candidates' / 'employers' / 'managers'
 
 //  START # ADMIN  Pages for dashborad
 import DashBoard from "./Pages/DashBoardPages/DashBoard";
 import Users from "./Pages/DashBoardPages/Users";
 import NotFoundDashboard from "./Pages/DashBoardPages/NotFoundDashboard";
+import GetJobApplyers from "./Components/UIComponents/Profiles/ContentComponents/GetJobApplyers";
 //  END #  ADMIN  Pages for dashborad
 
 function App() {
@@ -118,6 +120,10 @@ function App() {
                       <Route path="Employerinfo" element={<Employerinfo />} />
                       <Route path="ManageJobs" element={<ManageJobs />} />
                       <Route path="PostJobs" element={<PostJobs />} />
+                      <Route path="Applyers">
+                        <Route index element={<NotFound />} />
+                        <Route path=":JobId" element={<GetJobApplyers />} />
+                      </Route>
                       <Route path="ChangePassword" element={<ChangePassword />} />
                     </Route>
                   </Route>

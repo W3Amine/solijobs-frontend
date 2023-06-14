@@ -8,6 +8,7 @@ export default function Jobs() {
   const [AppliedJobsData, setAppliedJobsData] = useState();
   const [SavedJobsData, setSavedJobsData] = useState();
   const [JobDetails, setJobDetails] = useState();
+  const [JobApplyersData, setJobApplyersData] = useState();
 
   const GetJobDetails = async (id) => {
     await AxiosClient.get("/jobs/GetJobDetails/" + id).then(({ data }) => {
@@ -45,6 +46,12 @@ export default function Jobs() {
     });
   };
 
+  const GetJobApplyers = async (id) => {
+    await AxiosClient.get("/jobs/GetJobApplyers/" + id).then(({ data }) => {
+      setJobApplyersData(data);
+    });
+  };
+
   return {
     GetJobDetails,
     JobDetails,
@@ -58,5 +65,7 @@ export default function Jobs() {
     AppliedJobsData,
     GetSavedJobs,
     SavedJobsData,
+    GetJobApplyers,
+    JobApplyersData,
   };
 }
