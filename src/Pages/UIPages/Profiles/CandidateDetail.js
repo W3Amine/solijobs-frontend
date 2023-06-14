@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SinglePageHeader from "../../../Components/UIComponents/SinglePageHeader";
 import bgimage from "../../../Assets/images/bg/footerbg.png";
+import GetCandidateData from "../../../API/Composables/Candidate/GetCandidateData";
+import { useParams } from "react-router-dom";
 
 export default function CandidateDetail() {
+  const params = useParams();
+  const CandidateId = params.CandidateId;
+  const { CandidateDataById, GetTheCandidateDataById } = GetCandidateData();
+
+  useEffect(() => {
+    GetTheCandidateDataById(CandidateId);
+  }, []);
+
+  if (!CandidateDataById) {
+    return "loading ... ";
+  }
   return (
     <>
-      <SinglePageHeader PageTitle="cadidate Name , full stack" />
+      <SinglePageHeader PageTitle={CandidateDataById.name} />
 
       <div className="section-full p-t120 p-b90 bg-white" style={{ transform: "none" }}>
         <div className="container" style={{ transform: "none" }}>
@@ -24,39 +37,35 @@ export default function CandidateDetail() {
                     <div className="overlay-main site-bg-primary opacity-01" />
                     <div className="candi-self-info">
                       <div className="candi-self-top">
-                        <div className="candi-fee">$20 / Day</div>
+                        {/* <div className="candi-fee">$20 / Day</div> */}
                         <div className="media">
-                          <img src="https://i.ibb.co/748qDqm/company.jpg" alt="#" />
+                          <img src={CandidateDataById.profileImage} alt="#" />
                         </div>
                         <div className="mid-content">
-                          <h4 className="job-title">Wanda Montgomery</h4>
-                          <p>Senior UI / UX Designer and Developer at Google INC</p>
-                          <p className="candidate-address">
+                          <h4 className="job-title">{CandidateDataById.name}</h4>
+                          {/* <p>Senior UI / UX Designer and Developer at Google INC</p> */}
+                          {/* <p className="candidate-address">
                             <i className="feather-map-pin" />
                             United States
-                          </p>
+                          </p> */}
                         </div>
                       </div>
                       <div className="candi-self-bottom">
                         <a href="javascript:;" className="site-button outline-white">
                           Hire Me Now
                         </a>
-                        <a href="javascript:;" className="site-button secondry">
-                          Download CV
-                        </a>
+                        {CandidateDataById.candidate_profile.cv && (
+                          <a href={CandidateDataById.candidate_profile.cv} className="site-button secondry">
+                            Download CV
+                          </a>
+                        )}
                       </div>
                     </div>
                   </div>
                   <h4 className="s-title">About Me</h4>
-                  <p>
-                    Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea
-                    voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
-                  </p>
-                  <p>
-                    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
-                    cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi.
-                  </p>
-                  <h4 className="s-title">Skills</h4>
+                  <p>{CandidateDataById.candidate_profile.about}</p>
+
+                  {/* <h4 className="s-title">Skills</h4>
                   <div className="tw-sidebar-tags-wrap">
                     <div className="tagcloud">
                       <a href="javascript:void(0)">Finance</a>
@@ -70,9 +79,9 @@ export default function CandidateDetail() {
                       <a href="javascript:void(0)">IT Consulting</a>
                       <a href="javascript:void(0)">Manufacturing</a>
                     </div>
-                  </div>
-                  <h4 className="s-title">Work Experience</h4>
-                  <div className="timing-list-wrap">
+                  </div> */}
+                  {/* <h4 className="s-title">Work Experience</h4> */}
+                  {/* <div className="timing-list-wrap">
                     <div className="timing-list">
                       <div className="time-list-date">2012 to 2016</div>
                       <div className="time-list-title">Bluetech, Inc</div>
@@ -136,7 +145,7 @@ export default function CandidateDetail() {
                         </p>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <div
@@ -165,52 +174,57 @@ export default function CandidateDetail() {
                       <div className="s-info">
                         <ul>
                           <li>
-                            <div className="s-info-inner">
+                            {/* <div className="s-info-inner">
                               <i className="fas fa-money-bill-wave" />
                               <span className="title">Offered Salary</span>
                               <div className="s-info-discription">$20 / Day</div>
-                            </div>
+                            </div> */}
                           </li>
                           <li>
                             <div className="s-info-inner">
                               <i className="fas fa-clock" />
                               <span className="title">Experience</span>
-                              <div className="s-info-discription">6 Year</div>
+                              <div className="s-info-discription">{CandidateDataById.candidate_profile.experience}</div>
                             </div>
                           </li>
                           <li>
                             <div className="s-info-inner">
                               <i className="fas fa-venus-mars" />
                               <span className="title">Gender</span>
-                              <div className="s-info-discription">Male</div>
+                              <div className="s-info-discription">{CandidateDataById.candidate_profile.gender}</div>
                             </div>
                           </li>
                           <li>
                             <div className="s-info-inner">
                               <i className="fas fa-mobile-alt" />
                               <span className="title">Phone</span>
-                              <div className="s-info-discription">+291 560 56456</div>
+                              <div className="s-info-discription">{CandidateDataById.phoneNumber}</div>
                             </div>
                           </li>
                           <li>
                             <div className="s-info-inner">
                               <i className="fas fa-at" />
                               <span className="title">Email</span>
-                              <div className="s-info-discription">thewebmaxdemo@gmail.com</div>
+                              <div className="s-info-discription">{CandidateDataById.email}</div>
                             </div>
                           </li>
                           <li>
                             <div className="s-info-inner">
                               <i className="fas fa-book-reader" />
                               <span className="title">Qualification</span>
-                              <div className="s-info-discription">Developer</div>
+                              <div className="s-info-discription">{CandidateDataById.candidate_profile.qualification}</div>
                             </div>
                           </li>
                           <li>
                             <div className="s-info-inner">
                               <i className="fas fa-map-marker-alt" />
                               <span className="title">Address</span>
-                              <div className="s-info-discription">1363-1385 Sunset Blvd Angeles, CA 90026 ,USA</div>
+                              <div className="s-info-discription">{CandidateDataById.candidate_profile.address}</div>
+                            </div>
+                            <div className="s-info-inner">
+                              <i className="fa-regular fa-face-smile" />
+                              <span className="title">Age</span>
+                              <div className="s-info-discription">{CandidateDataById.candidate_profile.age}</div>
                             </div>
                           </li>
                         </ul>

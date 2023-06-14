@@ -72,9 +72,15 @@ function App() {
                   <Route index element={<Blog />} />
                   <Route path=":SingleBlogSlug" element={<BlogSingle />} />
                 </Route>
+                <Route path="Candidate">
+                  <Route index element={<NotFound />} />
+                  <Route path=":CandidateId" element={<CandidateDetail />} />
+                </Route>
+                <Route path="Employer">
+                  <Route index element={<NotFound />} />
+                  <Route path=":EmployerId" element={<EmployerDetail />} />
+                </Route>
                 <Route path="contact" element={<Contact />} />
-                <Route path="CandidateDetail" element={<CandidateDetail />} />
-                <Route path="EmployerDetail" element={<EmployerDetail />} />
 
                 {/* ====================================================================== */}
                 {/* ============================= START Guest routes ==================== */}
