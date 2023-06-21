@@ -1,6 +1,5 @@
 import { useState } from "react";
 import AxiosClient from "../AxiosClient";
-
 export default function Jobs() {
   const [EmployerJobsData, setData] = useState();
   const [UnactiveJobsData, setUnactiveJobsData] = useState();
@@ -9,6 +8,7 @@ export default function Jobs() {
   const [SavedJobsData, setSavedJobsData] = useState();
   const [JobDetails, setJobDetails] = useState();
   const [JobApplyersData, setJobApplyersData] = useState();
+  const [DeleteJobData, setDeleteJobData] = useState();
 
   const GetJobDetails = async (id) => {
     await AxiosClient.get("/jobs/GetJobDetails/" + id).then(({ data }) => {
@@ -52,6 +52,33 @@ export default function Jobs() {
     });
   };
 
+  const DeleteJob = async (id) => {
+    await AxiosClient.delete("/jobs/" + id).then(({ data }) => {
+      setDeleteJobData(data);
+    });
+  };
+
+  const saveJob = async (data) => {
+    await AxiosClient.post("/jobs/saveJob", data).then(({ data }) => {
+      // setDeleteJobData(data);
+      console.log(data);
+    });
+  };
+
+  const applyjob = async (data) => {
+    await AxiosClient.post("/jobs/applyjob", data).then(({ data }) => {
+      // setDeleteJobData(data);
+      console.log(data);
+    });
+  };
+
+  const Activatejob = async (data) => {
+    await AxiosClient.post("/jobs/Activatejob", data).then(({ data }) => {
+      // setDeleteJobData(data);
+      console.log(data);
+    });
+  };
+
   return {
     GetJobDetails,
     JobDetails,
@@ -67,5 +94,10 @@ export default function Jobs() {
     SavedJobsData,
     GetJobApplyers,
     JobApplyersData,
+    DeleteJob,
+    DeleteJobData,
+    saveJob,
+    applyjob,
+    Activatejob,
   };
 }

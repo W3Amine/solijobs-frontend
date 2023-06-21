@@ -1,8 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import parse from "html-react-parser";
+import Jobs from "../../API/Jobs/Jobs";
+import { Navigate } from "react-router-dom";
 
 export default function JobItem({ usage, JobData }) {
+  const [redirect, setredirect] = useState(false);
+  const { DeleteJob, DeleteJobData, saveJob, applyjob, Activatejob } = Jobs();
+
+  function HandleDelete(ele) {
+    console.log(ele.currentTarget.id);
+    DeleteJob(ele.currentTarget.id);
+  }
+
+  function HandleSave(ele) {
+    console.log(ele.currentTarget.id);
+    const data = { job_id: ele.currentTarget.id };
+    saveJob(data);
+  }
+
+  function HandleApply(ele) {
+    console.log(ele.currentTarget.id);
+    const data = { job_id: ele.currentTarget.id };
+    applyjob(data);
+  }
+
+  function HandleActivate(ele) {
+    console.log(ele.currentTarget.id);
+    const data = { job_id: ele.currentTarget.id };
+    Activatejob(data);
+  }
+
+  useEffect(() => {
+    if (DeleteJobData === 1) {
+      setredirect(true);
+    }
+  }, [DeleteJobData]);
+
+  if (redirect === true) {
+    return <Navigate to="/EmployerProfile/ManageJobs" />;
+  }
+
   let type = "";
 
   switch (JobData.type) {
@@ -96,7 +134,7 @@ export default function JobItem({ usage, JobData }) {
                         </li>
 
                         <li>
-                          <a className="dropdown-item" href="#">
+                          <a className="dropdown-item">
                             <i className="fa-regular fa-pen-to-square me-2" /> Edit Job
                           </a>
                         </li>
@@ -104,7 +142,7 @@ export default function JobItem({ usage, JobData }) {
                           <hr className="dropdown-divider" />
                         </li>
                         <li>
-                          <a className="dropdown-item" href="#">
+                          <a id={JobData.id} onClick={HandleDelete} className="dropdown-item">
                             <i className="fa-regular me-2 fa-trash-can" />
                             Delete Job
                           </a>
@@ -136,12 +174,12 @@ export default function JobItem({ usage, JobData }) {
                           </Link>
                         </li>
                         <li>
-                          <a className="dropdown-item" href="#">
+                          <a className="dropdown-item" href="#" id={JobData.id} onClick={HandleApply}>
                             <i className="fa-regular fa-bookmark me-2" /> Apply
                           </a>
                         </li>
                         <li>
-                          <a className="dropdown-item" href="#">
+                          <a className="dropdown-item" href="#" id={JobData.id} onClick={HandleSave}>
                             <i className="fa-regular fa-bookmark me-2" /> Save Job
                           </a>
                         </li>
@@ -157,7 +195,7 @@ export default function JobItem({ usage, JobData }) {
                           </Link>
                         </li>
                         <li>
-                          <a className="dropdown-item" href="#">
+                          <a className="dropdown-item" href="#" id={JobData.id} onClick={HandleActivate}>
                             <i className="fa-regular fa-circle-check me-2" /> Activate Job
                           </a>
                         </li>

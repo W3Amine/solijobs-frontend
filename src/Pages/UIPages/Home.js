@@ -44,7 +44,7 @@ export default function Home() {
 
           <div className="section-content">
             {/* START # Jobs List Component */}
-            <JobsList />
+            {/* <JobsList /> */}
             {/* END # Jobs List Component */}
 
             <div className="text-center m-b30">

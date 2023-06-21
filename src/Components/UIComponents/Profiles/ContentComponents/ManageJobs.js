@@ -10,9 +10,6 @@ export default function ManageJobs() {
   const [Show, setShow] = useState("5");
   const [Type, setType] = useState(null);
 
-
-  
-
   useEffect(() => {
     setPage(1);
   }, [Show]);

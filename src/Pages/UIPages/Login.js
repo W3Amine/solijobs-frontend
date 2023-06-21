@@ -80,7 +80,7 @@ export default function Login() {
                   <span className="center-text-or">Or</span>
                 </div>
               </div>
-              <div className="col-md-12">
+              {/* <div className="col-md-12">
                 <div className="form-group">
                   <button type="submit" className="log_with_facebook">
                     <i className="fab fa-facebook" />
@@ -91,11 +91,11 @@ export default function Login() {
               <div className="col-md-12">
                 <div className="form-group">
                   <button type="submit" className="log_with_google">
-                    <img src={googleicon} alt="" />
+                    <img src=googleicon alt="" />
                     Continue with Google
                   </button>
                 </div>
-              </div>
+              </div> */}
             </div>
           </form>
         </div>
