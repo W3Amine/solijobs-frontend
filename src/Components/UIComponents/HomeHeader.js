@@ -19,7 +19,7 @@ export default function HomeHeader() {
             <div className="bnr-title-large">Discover Your Dream Job!</div>
             <div className="bnr-discription">Type your keyword, then click search to find your perfect job.</div>
             {/* START # Job Search Form Component */}
-            <JobSearchForm />
+            {/* <JobSearchForm /> */}
             {/* END # Job Search Form Component */}
           </div>
         </div>
